@@ -4,11 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Quinceañera – Izis (Rosa Palo y Oro)</title>
-  
-  <!-- Fuentes elegantes: Cinzel (Estilo Sephora), Playfair Display (Estilo Hayden), Jost y Belleza -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Belleza&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
   
   <style>
     /* PALETA DE COLORES CORREGIDA: Predominio Rosa Palo + Acentos de Oro */
@@ -36,7 +32,7 @@
 
     body {
       font-family: 'Jost', sans-serif;
-      background-color: var(--rose-bg-light);
+      background-color: var(--rose-bg-light); /* FONGO CORREGIDO A ROSA PALO CLARO */
       color: var(--text);
       overflow-x: hidden;
     }
@@ -48,7 +44,7 @@
       pointer-events: none;
       z-index: 0;
       overflow: hidden;
-      opacity: .4;
+      opacity: .4; /* Un poco más visible sobre el fondo rosa */
     }
     .petals-bg svg { width: 100%; height: 100%; }
 
@@ -62,6 +58,7 @@
       justify-content: center;
       text-align: center;
       padding: 60px 24px 80px;
+      /* Degradado sutil de rosa a rosa */
       background:
         radial-gradient(ellipse 80% 60% at 50% 0%,   #fce4ec 0%, transparent 70%),
         radial-gradient(ellipse 60% 50% at 20% 100%, #fce4ec 0%, transparent 60%),
@@ -74,12 +71,14 @@
       content: '';
       position: absolute;
       inset: 0;
+      /* Puntos dorados muy sutiles */
       background-image:
         radial-gradient(circle, var(--gold) .5px, transparent .5px);
       background-size: 50px 50px;
       opacity: .08;
     }
 
+    /* Adorno superior dorado */
     .crown {
       font-size: clamp(2rem, 6vw, 3.5rem);
       letter-spacing: .3em;
@@ -89,8 +88,8 @@
     }
 
     .hero-label {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 200;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
       font-size: clamp(.65rem, 2vw, .8rem);
       letter-spacing: .5em;
       text-transform: uppercase;
@@ -98,23 +97,18 @@
       animation: fadeDown 1s .15s ease both;
     }
 
-    /* Nombre estilo Sephora */
     .hero-name {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(2.5rem, 8vw, 5.5rem);
-      font-weight: 400;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      line-height: 1.2;
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(4rem, 14vw, 9rem);
+      line-height: 1.1;
       color: var(--rose-deep);
-      text-shadow: 1px 1px 10px rgba(182,141,74,0.15);
+      text-shadow: 1px 1px 10px rgba(182,141,74,0.15); /* Brillo dorado muy tenue */
       animation: fadeDown 1s .3s ease both;
-      margin: 20px 0 10px;
+      margin: 12px 0 6px;
     }
 
-    /* Subtítulo estilo Hayden */
     .hero-XV {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-style: italic;
       font-size: clamp(1.4rem, 5vw, 2.5rem);
       color: var(--gold-deep);
@@ -134,11 +128,11 @@
     .hero-divider i { color: var(--gold-deep); font-size: 1rem; }
 
     .hero-date-preview {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 3vw, 1.3rem);
       font-weight: 400;
       color: var(--gold-text);
-      letter-spacing: .2em;
+      letter-spacing: .15em;
       margin-top: 18px;
       animation: fadeUp 1s .75s ease both;
     }
@@ -171,14 +165,16 @@
     /* ── SECTIONS WRAPPER ── */
     .sections { position: relative; z-index: 1; }
 
-    /* ── SECTION BASE (CORREGIDO: Ya no están ocultas por defecto) ── */
+    /* ── SECTION BASE ── */
     section {
       padding: clamp(70px, 12vw, 120px) 24px;
       max-width: 860px;
       margin: 0 auto;
-      opacity: 1; /* Forzado a visible */
-      transform: none;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity .8s ease, transform .8s ease;
     }
+    section.visible { opacity: 1; transform: none; }
 
     .section-tag {
       font-size: .65rem;
@@ -192,14 +188,11 @@
     }
 
     h2 {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(1.8rem, 5vw, 3rem);
-      font-weight: 400;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--gold-text);
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      color: var(--gold-text); /* Títulos en dorado */
       text-align: center;
-      line-height: 1.3;
+      line-height: 1.2;
       margin-bottom: 12px;
     }
 
@@ -211,21 +204,21 @@
       margin: 0 auto 40px;
     }
 
-    /* ── MESSAGE ── */
+    /* ── MESSAGE TARJETA ROSA PALO ── */
     .message-card {
-      background-color: var(--rose-card);
-      border: 1px solid rgba(212, 169, 106, 0.3);
+      background-color: var(--rose-card); /* FONDO CORREGIDO A ROSA SUAVE */
+      border: 1px solid rgba(212, 169, 106, 0.3); /* Borde dorado fino */
       border-radius: 8px;
       padding: clamp(36px, 8vw, 64px) clamp(28px, 10vw, 80px);
       text-align: center;
       position: relative;
-      box-shadow: 0 12px 48px rgba(201, 127, 147, 0.15);
+      box-shadow: 0 12px 48px rgba(201, 127, 147, 0.15); /* Sombra rosada */
     }
     .message-card::before,
     .message-card::after {
       content: '❀';
       position: absolute;
-      color: rgba(212, 169, 106, 0.3);
+      color: rgba(212, 169, 106, 0.3); /* Flor dorada sutil */
       font-size: clamp(4rem, 10vw, 6rem);
       line-height: 1;
     }
@@ -233,42 +226,36 @@
     .message-card::after  { bottom: -20px; right: 20px; transform: rotate(180deg); }
 
     .message-card p {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: clamp(1.1rem, 3.2vw, 1.35rem);
+      font-size: clamp(1.1rem, 3.2vw, 1.4rem);
       line-height: 1.9;
       color: var(--text);
-      font-weight: 400;
+      font-weight: 300;
     }
     .message-card .signature {
       margin-top: 28px;
-      font-family: 'Cinzel', serif;
-      font-weight: 400;
-      font-size: clamp(1.2rem, 4vw, 1.8rem);
-      letter-spacing: 0.1em;
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(1.8rem, 6vw, 2.4rem);
       color: var(--gold-text);
     }
 
-    /* ── DETAILS ── */
+    /* ── DETAILS TARJETAS ROSA PALO ── */
     .details-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 28px;
       margin-bottom: 48px;
     }
 
     .detail-card {
-      background-color: var(--rose-card);
-      border: 1px solid rgba(212, 169, 106, 0.3);
+      background-color: var(--rose-card); /* FONDO CORREGIDO A ROSA SUAVE */
+      border: 1px solid rgba(212, 169, 106, 0.3); /* Borde dorado fino */
       border-radius: 8px;
       padding: 36px 24px;
       text-align: center;
-      box-shadow: 0 6px 28px rgba(201, 127, 147, 0.1);
+      box-shadow: 0 6px 28px rgba(201, 127, 147, 0.1); /* Sombra rosada */
       transition: transform .3s ease, box-shadow .3s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
     }
     .detail-card:hover {
       transform: translateY(-5px);
@@ -283,8 +270,8 @@
     }
 
     .detail-card h3 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 400;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
       font-size: .65rem;
       letter-spacing: .5em;
       text-transform: uppercase;
@@ -293,40 +280,18 @@
     }
 
     .detail-card .value {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(1rem, 3vw, 1.25rem);
-      font-weight: 500;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+      font-weight: 400;
       line-height: 1.5;
       color: var(--text);
     }
 
     .detail-card .sub {
-      font-family: 'Montserrat', sans-serif;
       font-size: .8rem;
       color: var(--gold-text);
       margin-top: 6px;
       font-weight: 300;
-    }
-
-    /* Botón interno para mapa GPS */
-    .btn-mapa {
-      display: inline-block;
-      margin-top: 15px;
-      font-size: 0.75rem;
-      color: var(--gold-text);
-      text-decoration: none;
-      border: 1px solid var(--gold);
-      padding: 6px 16px;
-      border-radius: 20px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
-
-    .btn-mapa:hover {
-      background-color: var(--gold);
-      color: white;
     }
 
     /* ── BOTÓN DE CONFIRMACIÓN GRADIENTE DORADO ── */
@@ -337,15 +302,16 @@
 
     .btn-confirmar {
       display: inline-block;
+      /* Gradiente metálico dorado */
       background: linear-gradient(135deg, var(--gold-deep) 0%, var(--gold) 50%, var(--gold-deep) 100%);
-      color: #fff;
+      color: #fff; /* Texto blanco para resaltar */
       text-decoration: none;
       padding: 16px 40px;
       border-radius: 50px;
       font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 2px;
-      font-weight: 500;
+      font-weight: 600;
       transition: all 0.3s ease;
       box-shadow: 0 8px 24px rgba(182, 141, 74, 0.3);
       border: 1px solid var(--gold-deep);
@@ -357,7 +323,7 @@
       box-shadow: 0 12px 32px rgba(182, 141, 74, 0.5);
     }
 
-    /* ── PROGRAM ── */
+    /* ── PROGRAM con cronología dorada ── */
     .program-list {
       list-style: none;
       position: relative;
@@ -369,6 +335,7 @@
       left: 50%;
       top: 0; bottom: 0;
       width: 1px;
+      /* Línea dorada */
       background: linear-gradient(to bottom, transparent, var(--gold), transparent);
       transform: translateX(-50%);
     }
@@ -386,19 +353,18 @@
     .prog-time {
       flex: 1;
       text-align: right;
-      font-family: 'Cinzel', serif;
-      font-size: 1.2rem;
-      letter-spacing: 0.05em;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
       color: var(--gold-text);
-      font-weight: 600;
+      font-weight: 500;
     }
     .program-list li:nth-child(even) .prog-time { text-align: left; }
 
     .prog-dot {
       width: 14px; height: 14px;
       border-radius: 50%;
-      background: var(--gold);
-      border: 3px solid var(--rose-bg-light);
+      background: var(--gold); /* Punto dorado */
+      border: 3px solid var(--rose-bg-light); /* Borde del color de fondo */
       box-shadow: 0 0 0 1px var(--gold);
       flex-shrink: 0;
       z-index: 1;
@@ -407,16 +373,14 @@
     .prog-info { flex: 1; }
     .prog-info strong {
       display: block;
-      font-family: 'Montserrat', sans-serif;
       font-weight: 500;
       font-size: 1.05rem;
       color: var(--text);
     }
     .prog-info span {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: .85rem;
+      font-size: .8rem;
       color: var(--gold-text);
+      font-weight: 300;
     }
     .program-list li:nth-child(even) .prog-info { text-align: right; }
 
@@ -428,7 +392,7 @@
       .program-list li:nth-child(even) .prog-info { text-align: left; }
     }
 
-    /* ── COUNTDOWN ── */
+    /* ── COUNTDOWN con cajas Rosa Palo ── */
     .countdown-wrap {
       text-align: center;
     }
@@ -451,13 +415,13 @@
     .cd-box {
       width: clamp(70px, 20vw, 104px);
       height: clamp(70px, 20vw, 104px);
-      background-color: var(--rose-card);
-      border: 1px solid rgba(212, 169, 106, 0.3);
+      background-color: var(--rose-card); /* FONDO CORREGIDO A ROSA SUAVE */
+      border: 1px solid rgba(212, 169, 106, 0.3); /* Borde dorado */
       border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 6px 24px rgba(201, 127, 147, 0.1);
+      box-shadow: 0 6px 24px rgba(201, 127, 147, 0.1); /* Sombra rosada */
       position: relative;
       overflow: hidden;
     }
@@ -471,64 +435,59 @@
     }
 
     .cd-num {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(1.6rem, 6vw, 2.5rem);
-      font-weight: 500;
-      color: var(--gold-deep);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 8vw, 3.2rem);
+      font-weight: 400;
+      color: var(--gold-deep); /* Número dorado */
       line-height: 1;
       position: relative;
       z-index: 1;
     }
 
     .cd-label {
-      font-family: 'Montserrat', sans-serif;
       font-size: .6rem;
       letter-spacing: .4em;
       text-transform: uppercase;
       color: var(--gold-text);
-      font-weight: 400;
+      font-weight: 300;
     }
 
     .cd-sep {
-      font-family: 'Cinzel', serif;
-      font-size: 2rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
       color: var(--gold);
       align-self: flex-start;
       margin-top: clamp(16px, 5vw, 24px);
       opacity: .6;
     }
 
-    /* ── FOOTER ELEGANTE ── */
+    /* ── FOOTER Rosa Palo ── */
     footer {
       position: relative;
       z-index: 1;
       text-align: center;
       padding: 60px 24px 80px;
+      /* Degradado final a rosa */
       background: linear-gradient(to bottom, transparent, var(--rose-main), var(--rose-bg-light));
       border-top: 1px solid rgba(212, 169, 106, 0.2);
     }
 
     footer .footer-name {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(1.8rem, 5vw, 2.8rem);
-      font-weight: 400;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.5rem, 8vw, 4rem);
       color: var(--rose-deep);
     }
 
     footer p {
-      font-family: 'Montserrat', sans-serif;
       font-size: .75rem;
       letter-spacing: .3em;
       text-transform: uppercase;
       color: var(--gold-text);
       font-weight: 400;
-      margin-top: 12px;
+      margin-top: 10px;
     }
 
-    .belleza-regular {
-      font-family: 'Belleza', sans-serif;
+    .footer-flowers {
       font-size: 1.6rem;
       letter-spacing: .5em;
       color: var(--gold);
@@ -536,7 +495,17 @@
       opacity: .7;
     }
 
-    /* Animación del banner de bienvenida */
+    /* ── DIVIDER ORNAMENT GOLD ── */
+    .ornament {
+      text-align: center;
+      color: var(--gold);
+      font-size: 1.5rem;
+      letter-spacing: .5em;
+      margin: 0 auto 40px;
+      display: block;
+    }
+
+    /* ── ANIMATIONS ── */
     @keyframes fadeDown {
       from { opacity: 0; transform: translateY(-24px); }
       to   { opacity: 1; transform: none; }
@@ -553,7 +522,6 @@
 </head>
 <body>
 
-<!-- fondo de pétalos flotantes -->
 <div class="petals-bg" aria-hidden="true">
   <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -580,12 +548,11 @@
   </svg>
 </div>
 
-<!-- ═══════════ HERO ═══════════ -->
 <header class="hero">
   <div class="crown" aria-hidden="true">✦ ✺ ✦</div>
   <span class="hero-label">Te Invitamos a Celebrar</span>
-  <h1 class="hero-name">Izis Beltran</h1>
-  <p class="hero-XV">~ My XV Years ~</p>
+  <h1 class="hero-name">Izis</h1>
+  <p class="hero-XV">~ XV Años ~</p>
   <div class="hero-divider">
     <span></span>
     <i aria-hidden="true">✦</i>
@@ -597,7 +564,6 @@
 
 <div class="sections">
 
-  <!-- ═══════════ MENSAJE ═══════════ -->
   <section id="mensaje" aria-labelledby="msg-heading">
     <span class="section-tag">Un mensaje especial</span>
     <h2 id="msg-heading">Para ti, que llegaste</h2>
@@ -615,14 +581,12 @@
     </div>
   </section>
 
-  <!-- ═══════════ DETALLES ═══════════ -->
   <section id="detalles" aria-labelledby="det-heading">
     <span class="section-tag">La celebración</span>
     <h2 id="det-heading">Detalles del evento</h2>
     <span class="gold-line"></span>
     <div class="details-grid">
 
-      <!-- TARJETA CON FECHA Y HORA UNIDAS -->
       <div class="detail-card">
         <span class="detail-icon" aria-hidden="true">📅</span>
         <h3>Fecha y Hora</h3>
@@ -636,21 +600,16 @@
         <h3>Lugar</h3>
         <p class="value">Salón Jardín<br/>Gales</p>
         <p class="sub">Calle Londres 1715, 85140 Cdad. Obregón, Son.</p>
-        <a href="https://maps.app.goo.gl/bUKpHJYaoJfYY7De9" target="_blank" class="btn-mapa">
-          🗺️ Ver Mapa GPS
+        
+        <a href="https://maps.app.goo.gl/bUKpHJYaoJfYY7De9" 
+           target="_blank" 
+           style="display: inline-block; margin-top: 15px; font-size: 0.75rem; color: var(--gold-text); text-decoration: none; border: 1px solid var(--gold); padding: 5px 15px; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px; font-weight: 500; transition: all 0.3s ease;">
+           🗺️ Ver Mapa GPS
         </a>
-      </div>
-
-      <div class="detail-card">
-        <span class="detail-icon" aria-hidden="true">👗</span>
-        <h3>Código de vestimenta</h3>
-        <p class="value">Formal</p>
-        <p class="sub">Color reservado: rosa palo</p>
       </div>
 
     </div>
 
-    <!-- Botón de Confirmación -->
     <div class="confirmar-container">
       <a href="https://wa.me/521234567890?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20de%20Izis%20Beltran." target="_blank" class="btn-confirmar">
         Confirmar Asistencia por WhatsApp
@@ -658,7 +617,6 @@
     </div>
   </section>
 
-  <!-- ═══════════ PROGRAMA ═══════════ -->
   <section id="programa" aria-labelledby="prog-heading">
     <span class="section-tag">La noche perfecta</span>
     <h2 id="prog-heading">Programa</h2>
@@ -715,7 +673,6 @@
     </ul>
   </section>
 
-  <!-- ── COUNTDOWN ── -->
   <section id="countdown" aria-labelledby="cd-heading">
     <div class="countdown-wrap">
       <span class="section-tag">El gran día se acerca</span>
@@ -747,15 +704,14 @@
 
 </div><!-- /sections -->
 
-<!-- ═══════════ FOOTER ═══════════ -->
 <footer>
   <p class="footer-name">Izis Beltran</p>
   <p>VI · XI · MMXXVI</p>
-  <div class="belleza-regular" aria-hidden="true">✦  ✸  ✦  ✸  ✦</div>
+  <div class="footer-flowers" aria-hidden="true">✦  ✸  ✦  ✸  ✦</div>
 </footer>
 
 <script>
-  /* ── Sincronizado para el 6 de Noviembre de 2026 a las 21:00 ── */
+  /* ── Cuenta Regresiva Sincronizada ── */
   const target = new Date('2026-11-06T21:00:00');
 
   function updateCountdown() {
@@ -783,6 +739,23 @@
 
   updateCountdown();
   setInterval(updateCountdown, 1000);
+
+  /* ── Intersection Observer (Aparición en scroll) ── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { 
+      if (e.isIntersecting) {
+        e.target.classList.add('visible'); 
+      }
+    });
+  }, { threshold: 0.05 });
+
+  document.querySelectorAll('section').forEach(s => {
+    observer.observe(s);
+    const rect = s.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom >= 0) {
+      s.classList.add('visible');
+    }
+  });
 </script>
 </body>
 </html>
