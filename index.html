@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quinceañera – Sofía Valentina (Rosa Palo y Oro)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+  
+  <style>
+    /* PALETA DE COLORES CORREGIDA: Predominio Rosa Palo + Acentos de Oro */
+    :root {
+      /* Base Rosa Palo */
+      --rose-bg-light: #fdf3f5; /* Fondo de la página (Rosa Palo muy claro) */
+      --rose-card:     #fce8ed; /* Fondo de tarjetas (Rosa Palo suave) */
+      --rose-main:     #f2c4ce; /* Rosa Palo Principal */
+      --rose-dark:     #e8a0b0; /* Rosa Palo Medio */
+      --rose-deep:     #c97f93; /* Rosa Palo Oscuro para texto importante */
+      
+      /* Acentos Dorados */
+      --gold:          #d4a96a; /* Oro Base */
+      --gold-deep:     #b68d4a; /* Oro Profundo */
+      --gold-text:     #a67c3a; /* Oro para Texto y Acentos finos */
+      
+      /* Texto */
+      --text:          #5a3a42; /* Texto Principal (marrón rosado oscuro) */
+      --text-light:    #9b7080; /* Texto Secundario */
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background-color: var(--rose-bg-light); /* FONGO CORREGIDO A ROSA PALO CLARO */
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── DECORATIVE SVG PETALS (Rosa Palo) ── */
+    .petals-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+      opacity: .4; /* Un poco más visible sobre el fondo rosa */
+    }
+    .petals-bg svg { width: 100%; height: 100%; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px 80px;
+      /* Degradado sutil de rosa a rosa */
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%,   #fce4ec 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 20% 100%, #fce4ec 0%, transparent 60%),
+        var(--rose-bg-light);
+      z-index: 1;
+      border-bottom: 2px solid var(--gold-deep);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      /* Puntos dorados muy sutiles */
+      background-image:
+        radial-gradient(circle, var(--gold) .5px, transparent .5px);
+      background-size: 50px 50px;
+      opacity: .08;
+    }
+
+    /* Adorno superior dorado */
+    .crown {
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      letter-spacing: .3em;
+      color: var(--gold);
+      animation: fadeDown .9s ease both;
+      margin-bottom: 6px;
+    }
+
+    .hero-label {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: clamp(.65rem, 2vw, .8rem);
+      letter-spacing: .5em;
+      text-transform: uppercase;
+      color: var(--rose-deep);
+      animation: fadeDown 1s .15s ease both;
+    }
+
+    .hero-name {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(4rem, 14vw, 9rem);
+      line-height: 1.1;
+      color: var(--rose-deep);
+      text-shadow: 1px 1px 10px rgba(182,141,74,0.15); /* Brillo dorado muy tenue */
+      animation: fadeDown 1s .3s ease both;
+      margin: 12px 0 6px;
+    }
+
+    .hero-XV {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.4rem, 5vw, 2.5rem);
+      color: var(--gold-deep);
+      letter-spacing: .25em;
+      animation: fadeDown 1s .45s ease both;
+    }
+
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 30px auto 0;
+      width: min(320px, 80%);
+      animation: fadeUp 1s .6s ease both;
+    }
+    .hero-divider span { flex: 1; height: 1px; background: var(--gold-deep); opacity: .6; }
+    .hero-divider i { color: var(--gold-deep); font-size: 1rem; }
+
+    .hero-date-preview {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 3vw, 1.3rem);
+      font-weight: 400;
+      color: var(--gold-text);
+      letter-spacing: .15em;
+      margin-top: 18px;
+      animation: fadeUp 1s .75s ease both;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: bounceDown 2s 1.5s infinite;
+      color: var(--gold-text);
+      font-size: .65rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+    .scroll-hint::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: var(--gold-text);
+      opacity: .7;
+    }
+
+    /* ── SECTIONS WRAPPER ── */
+    .sections { position: relative; z-index: 1; }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: clamp(70px, 12vw, 120px) 24px;
+      max-width: 860px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    section.visible { opacity: 1; transform: none; }
+
+    .section-tag {
+      font-size: .65rem;
+      letter-spacing: .5em;
+      text-transform: uppercase;
+      color: var(--rose-deep);
+      font-weight: 400;
+      display: block;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      color: var(--gold-text); /* Títulos en dorado */
+      text-align: center;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .gold-line {
+      display: block;
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-deep), transparent);
+      margin: 0 auto 40px;
+    }
+
+    /* ── MESSAGE TARJETA ROSA PALO ── */
+    .message-card {
+      background-color: var(--rose-card); /* FONDO CORREGIDO A ROSA SUAVE */
+      border: 1px solid rgba(212, 169, 106, 0.3); /* Borde dorado fino */
+      border-radius: 8px;
+      padding: clamp(36px, 8vw, 64px) clamp(28px, 10vw, 80px);
+      text-align: center;
+      position: relative;
+      box-shadow: 0 12px 48px rgba(201, 127, 147, 0.15); /* Sombra rosada */
+    }
+    .message-card::before,
+    .message-card::after {
+      content: '❀';
+      position: absolute;
+      color: rgba(212, 169, 106, 0.3); /* Flor dorada sutil */
+      font-size: clamp(4rem, 10vw, 6rem);
+      line-height: 1;
+    }
+    .message-card::before { top: -20px; left: 20px; }
+    .message-card::after  { bottom: -20px; right: 20px; transform: rotate(180deg); }
+
+    .message-card p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 3.2vw, 1.4rem);
+      line-height: 1.9;
+      color: var(--text);
+      font-weight: 300;
+    }
+    .message-card .signature {
+      margin-top: 28px;
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(1.8rem, 6vw, 2.4rem);
+      color: var(--gold-text);
+    }
+
+    /* ── DETAILS TARJETAS ROSA PALO ── */
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 28px;
+      margin-bottom: 48px;
+    }
+
+    .detail-card {
+      background-color: var(--rose-card); /* FONDO CORREGIDO A ROSA SUAVE */
+      border: 1px solid rgba(212, 169, 106, 0.3); /* Borde dorado fino */
+      border-radius: 8px;
+      padding: 36px 24px;
+      text-align: center;
+      box-shadow: 0 6px 28px rgba(201, 127, 147, 0.1); /* Sombra rosada */
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .detail-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(201, 127, 147, 0.2);
+    }
+
+    .detail-icon {
+      font-size: 2.2rem;
+      margin-bottom: 16px;
+      display: block;
+      color: var(--gold);
+    }
+
+    .detail-card h3 {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: .65rem;
+      letter-spacing: .5em;
+      text-transform: uppercase;
+      color: var(--gold-text);
+      margin-bottom: 12px;
+    }
+
+    .detail-card .value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .detail-card .sub {
+      font-size: .8rem;
+      color: var(--gold-text);
+      margin-top: 6px;
+      font-weight: 300;
+    }
+
+    /* ── BOTÓN DE CONFIRMACIÓN GRADIENTE DORADO ── */
+    .confirmar-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .btn-confirmar {
+      display: inline-block;
+      /* Gradiente metálico dorado */
+      background: linear-gradient(135deg, var(--gold-deep) 0%, var(--gold) 50%, var(--gold-deep) 100%);
+      color: #fff; /* Texto blanco para resaltar */
+      text-decoration: none;
+      padding: 16px 40px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 24px rgba(182, 141, 74, 0.3);
+      border: 1px solid var(--gold-deep);
+    }
+
+    .btn-confirmar:hover {
+      background: linear-gradient(135deg, var(--gold) 0%, #eac07e 50%, var(--gold) 100%);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(182, 141, 74, 0.5);
+    }
+
+    /* ── PROGRAM con cronología dorada ── */
+    .program-list {
+      list-style: none;
+      position: relative;
+      padding-left: 0;
+    }
+    .program-list::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 1px;
+      /* Línea dorada */
+      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+      transform: translateX(-50%);
+    }
+
+    .program-list li {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 30px;
+      position: relative;
+    }
+    .program-list li:nth-child(odd)  { flex-direction: row; }
+    .program-list li:nth-child(even) { flex-direction: row-reverse; }
+
+    .prog-time {
+      flex: 1;
+      text-align: right;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--gold-text);
+      font-weight: 500;
+    }
+    .program-list li:nth-child(even) .prog-time { text-align: left; }
+
+    .prog-dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--gold); /* Punto dorado */
+      border: 3px solid var(--rose-bg-light); /* Borde del color de fondo */
+      box-shadow: 0 0 0 1px var(--gold);
+      flex-shrink: 0;
+      z-index: 1;
+    }
+
+    .prog-info { flex: 1; }
+    .prog-info strong {
+      display: block;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    .prog-info span {
+      font-size: .8rem;
+      color: var(--gold-text);
+      font-weight: 300;
+    }
+    .program-list li:nth-child(even) .prog-info { text-align: right; }
+
+    @media (max-width: 520px) {
+      .program-list::before { left: 24px; }
+      .program-list li,
+      .program-list li:nth-child(even) { flex-direction: row; gap: 16px;}
+      .prog-time { display: none; }
+      .program-list li:nth-child(even) .prog-info { text-align: left; }
+    }
+
+    /* ── COUNTDOWN con cajas Rosa Palo ── */
+    .countdown-wrap {
+      text-align: center;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: clamp(14px, 5vw, 36px);
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+
+    .cd-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cd-box {
+      width: clamp(70px, 20vw, 104px);
+      height: clamp(70px, 20vw, 104px);
+      background-color: var(--rose-card); /* FONDO CORREGIDO A ROSA SUAVE */
+      border: 1px solid rgba(212, 169, 106, 0.3); /* Borde dorado */
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 24px rgba(201, 127, 147, 0.1); /* Sombra rosada */
+      position: relative;
+      overflow: hidden;
+    }
+    .cd-box::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      top: 50%;
+      height: 1px;
+      background: rgba(212, 169, 106, 0.2);
+    }
+
+    .cd-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 8vw, 3.2rem);
+      font-weight: 400;
+      color: var(--gold-deep); /* Número dorado */
+      line-height: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cd-label {
+      font-size: .6rem;
+      letter-spacing: .4em;
+      text-transform: uppercase;
+      color: var(--gold-text);
+      font-weight: 300;
+    }
+
+    .cd-sep {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      color: var(--gold);
+      align-self: flex-start;
+      margin-top: clamp(16px, 5vw, 24px);
+      opacity: .6;
+    }
+
+    /* ── FOOTER Rosa Palo ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 60px 24px 80px;
+      /* Degradado final a rosa */
+      background: linear-gradient(to bottom, transparent, var(--rose-main), var(--rose-bg-light));
+      border-top: 1px solid rgba(212, 169, 106, 0.2);
+    }
+
+    footer .footer-name {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      color: var(--rose-deep);
+    }
+
+    footer p {
+      font-size: .75rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--gold-text);
+      font-weight: 400;
+      margin-top: 10px;
+    }
+
+    .footer-flowers {
+      font-size: 1.6rem;
+      letter-spacing: .5em;
+      color: var(--gold);
+      margin-top: 24px;
+      opacity: .7;
+    }
+
+    /* ── DIVIDER ORNAMENT GOLD ── */
+    .ornament {
+      text-align: center;
+      color: var(--gold);
+      font-size: 1.5rem;
+      letter-spacing: .5em;
+      margin: 0 auto 40px;
+      display: block;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-24px); }
+      to   { opacity: 1; transform: none; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: none; }
+    }
+    @keyframes bounceDown {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="petals-bg" aria-hidden="true">
+  <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="pg" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#f2c4ce"/>
+        <stop offset="100%" stop-color="#f2c4ce" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <g fill="url(#pg)">
+      <ellipse cx="120"  cy="140"  rx="28" ry="18" transform="rotate(-30 120 140)"/>
+      <ellipse cx="320"  cy="60"   rx="22" ry="14" transform="rotate(15 320 60)"/>
+      <ellipse cx="600"  cy="200"  rx="32" ry="20" transform="rotate(45 600 200)"/>
+      <ellipse cx="900"  cy="80"   rx="20" ry="12" transform="rotate(-20 900 80)"/>
+      <ellipse cx="1200" cy="150"  rx="30" ry="18" transform="rotate(35 1200 150)"/>
+      <ellipse cx="1380" cy="50"   rx="18" ry="11" transform="rotate(-15 1380 50)"/>
+      <ellipse cx="80"   cy="500"  rx="24" ry="15" transform="rotate(60 80 500)"/>
+      <ellipse cx="250"  cy="780"  rx="28" ry="18" transform="rotate(-40 250 780)"/>
+      <ellipse cx="500"  cy="650"  rx="20" ry="13" transform="rotate(25 500 650)"/>
+      <ellipse cx="750"  cy="820"  rx="34" ry="21" transform="rotate(-10 750 820)"/>
+      <ellipse cx="1050" cy="700"  rx="22" ry="14" transform="rotate(50 1050 700)"/>
+      <ellipse cx="1300" cy="600"  rx="26" ry="16" transform="rotate(-35 1300 600)"/>
+      <ellipse cx="1420" cy="830"  rx="20" ry="12" transform="rotate(20 1420 830)"/>
+    </g>
+  </svg>
+</div>
+
+<header class="hero">
+  <div class="crown" aria-hidden="true">✦ ✺ ✦</div>
+  <span class="hero-label">Con todo el amor del mundo, te invitamos a celebrar</span>
+  <h1 class="hero-name">Izis</h1>
+  <p class="hero-XV">~ XV Años ~</p>
+  <div class="hero-divider">
+    <span></span>
+    <i aria-hidden="true">✦</i>
+    <span></span>
+  </div>
+  <p class="hero-date-preview">Sábado · 12 de Julio, 2027</p>
+  <div class="scroll-hint" aria-label="Desplázate hacia abajo">Desplazar</div>
+</header>
+
+<div class="sections">
+
+  <section id="mensaje" aria-labelledby="msg-heading">
+    <span class="section-tag">Un mensaje especial</span>
+    <h2 id="msg-heading">Para ti, que llegaste</h2>
+    <span class="gold-line"></span>
+    <div class="message-card">
+      <p>
+        Hay momentos en la vida que se graban para siempre en el corazón.<br/>
+        Este es uno de ellos.<br/><br/>
+        Con inmensa alegría y el alma llena de gratitud,<br/>
+        los invitamos a ser testigos del hermoso paso de nuestra hija a los quince años.<br/><br/>
+        Su sonrisa ilumina cada rincón de nuestra vida.<br/>
+        Hoy queremos compartirla con quienes más amamos.
+      </p>
+      <p class="signature">La Familia Ramírez</p>
+    </div>
+  </section>
+
+  <section id="detalles" aria-labelledby="det-heading">
+    <span class="section-tag">La celebración</span>
+    <h2 id="det-heading">Detalles del evento</h2>
+    <span class="gold-line"></span>
+    <div class="details-grid">
+
+      <div class="detail-card">
+        <span class="detail-icon" aria-hidden="true">📅</span>
+        <h3>Fecha</h3>
+        <p class="value">Sábado<br/>12 de Julio, 2027</p>
+      </div>
+
+      <div class="detail-card">
+        <span class="detail-icon" aria-hidden="true">🕖</span>
+        <h3>Hora</h3>
+        <p class="value">7:00 PM</p>
+        <p class="sub">Recepción desde las 6:30 PM</p>
+      </div>
+
+      <div class="detail-card">
+        <span class="detail-icon" aria-hidden="true">📍</span>
+        <h3>Lugar</h3>
+        <p class="value">Salón Jardín<br/>Las Rosas</p>
+        <p class="sub">Av. Primavera 345, Culiacán</p>
+      </div>
+
+      <div class="detail-card">
+        <span class="detail-icon" aria-hidden="true">👗</span>
+        <h3>Código de vestimenta</h3>
+        <p class="value">Formal</p>
+        <p class="sub">Color reservado: rosa palo</p>
+      </div>
+
+    </div>
+
+    <div class="confirmar-container">
+      <a href="https://wa.me/521234567890?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20de%20Sofía%20Valentina." target="_blank" class="btn-confirmar">
+        Confirmar Asistencia por WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <section id="programa" aria-labelledby="prog-heading">
+    <span class="section-tag">La noche perfecta</span>
+    <h2 id="prog-heading">Programa</h2>
+    <span class="gold-line"></span>
+    <ul class="program-list" role="list">
+      <li>
+        <span class="prog-time">6:30 PM</span>
+        <span class="prog-dot" aria-hidden="true"></span>
+        <div class="prog-info">
+          <strong>Recepción de invitados</strong>
+          <span>Cóctel de bienvenida &amp; música de fondo</span>
+        </div>
+      </li>
+      <li>
+        <span class="prog-time">7:00 PM</span>
+        <span class="prog-dot" aria-hidden="true"></span>
+        <div class="prog-info">
+          <strong>Entrada de la quinceañera</strong>
+          <span>El gran momento que todos esperamos</span>
+        </div>
+      </li>
+      <li>
+        <span class="prog-time">7:30 PM</span>
+        <span class="prog-dot" aria-hidden="true"></span>
+        <div class="prog-info">
+          <strong>Misa de acción de gracias</strong>
+          <span>Bendición especial y vals de honor</span>
+        </div>
+      </li>
+      <li>
+        <span class="prog-time">8:00 PM</span>
+        <span class="prog-dot" aria-hidden="true"></span>
+        <div class="prog-info">
+          <strong>Cena &amp; brindis</strong>
+          <span>Palabras emotivas de la familia</span>
+        </div>
+      </li>
+      <li>
+        <span class="prog-time">9:00 PM</span>
+        <span class="prog-dot" aria-hidden="true"></span>
+        <div class="prog-info">
+          <strong>Primer vals</strong>
+          <span>La princesa baila con su chambelán</span>
+        </div>
+      </li>
+      <li>
+        <span class="prog-time">9:30 PM</span>
+        <span class="prog-dot" aria-hidden="true"></span>
+        <div class="prog-info">
+          <strong>¡A bailar toda la noche!</strong>
+          <span>DJ y sorpresas especiales</span>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="countdown" aria-labelledby="cd-heading">
+    <div class="countdown-wrap">
+      <span class="section-tag">El gran día se acerca</span>
+      <h2 id="cd-heading">Cuenta regresiva</h2>
+      <span class="gold-line"></span>
+      <div class="countdown" role="timer" aria-live="polite" aria-label="Tiempo restante para la quinceañera">
+        <div class="cd-unit">
+          <div class="cd-box"><span class="cd-num" id="cd-dias">--</span></div>
+          <span class="cd-label">Días</span>
+        </div>
+        <span class="cd-sep" aria-hidden="true">:</span>
+        <div class="cd-unit">
+          <div class="cd-box"><span class="cd-num" id="cd-horas">--</span></div>
+          <span class="cd-label">Horas</span>
+        </div>
+        <span class="cd-sep" aria-hidden="true">:</span>
+        <div class="cd-unit">
+          <div class="cd-box"><span class="cd-num" id="cd-min">--</span></div>
+          <span class="cd-label">Minutos</span>
+        </div>
+        <span class="cd-sep" aria-hidden="true">:</span>
+        <div class="cd-unit">
+          <div class="cd-box"><span class="cd-num" id="cd-seg">--</span></div>
+          <span class="cd-label">Segundos</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><footer>
+  <p class="footer-name">Sofía Valentina</p>
+  <p>XII · VII · MMXXVII</p>
+  <div class="footer-flowers" aria-hidden="true">✦  ✸  ✦  ✸  ✦</div>
+</footer>
+
+<script>
+  /* ── Cuenta Regresiva Establecida para Julio de 2027 ── */
+  const target = new Date('2027-07-12T19:00:00');
+
+  function updateCountdown() {
+    const now  = new Date();
+    const diff = target - now;
+
+    if (diff <= 0) {
+      document.getElementById('cd-dias').textContent  = '00';
+      document.getElementById('cd-horas').textContent = '00';
+      document.getElementById('cd-min').textContent   = '00';
+      document.getElementById('cd-seg').textContent   = '00';
+      return;
+    }
+
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000)  / 60000);
+    const s = Math.floor((diff % 60000)    / 1000);
+
+    document.getElementById('cd-dias').textContent  = String(d).padStart(2,'0');
+    document.getElementById('cd-horas').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-min').textContent   = String(m).padStart(2,'0');
+    document.getElementById('cd-seg').textContent   = String(s).padStart(2,'0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  /* ── Intersection Observer (Aparición en scroll fluida) ── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { 
+      if (e.isIntersecting) {
+        e.target.classList.add('visible'); 
+      }
+    });
+  }, { threshold: 0.05 });
+
+  document.querySelectorAll('section').forEach(s => {
+    observer.observe(s);
+    const rect = s.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom >= 0) {
+      s.classList.add('visible');
+    }
+  });
+</script>
+</body>
+</html>
