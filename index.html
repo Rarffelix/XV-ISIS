@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Quinceañera – Izis (Rosa Palo y Oro)</title>
   
+  <!-- Fuentes elegantes: Cinzel (Estilo Sephora), Playfair Display (Estilo Hayden), Jost y Belleza -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Belleza&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
@@ -170,16 +171,14 @@
     /* ── SECTIONS WRAPPER ── */
     .sections { position: relative; z-index: 1; }
 
-    /* ── SECTION BASE ── */
+    /* ── SECTION BASE (CORREGIDO: Ya no están ocultas por defecto) ── */
     section {
       padding: clamp(70px, 12vw, 120px) 24px;
       max-width: 860px;
       margin: 0 auto;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity .8s ease, transform .8s ease;
+      opacity: 1; /* Forzado a visible */
+      transform: none;
     }
-    section.visible { opacity: 1; transform: none; }
 
     .section-tag {
       font-size: .65rem;
@@ -400,4 +399,390 @@
       border-radius: 50%;
       background: var(--gold);
       border: 3px solid var(--rose-bg-light);
-      box-shadow:
+      box-shadow: 0 0 0 1px var(--gold);
+      flex-shrink: 0;
+      z-index: 1;
+    }
+
+    .prog-info { flex: 1; }
+    .prog-info strong {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    .prog-info span {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: .85rem;
+      color: var(--gold-text);
+    }
+    .program-list li:nth-child(even) .prog-info { text-align: right; }
+
+    @media (max-width: 520px) {
+      .program-list::before { left: 24px; }
+      .program-list li,
+      .program-list li:nth-child(even) { flex-direction: row; gap: 16px;}
+      .prog-time { display: none; }
+      .program-list li:nth-child(even) .prog-info { text-align: left; }
+    }
+
+    /* ── COUNTDOWN ── */
+    .countdown-wrap {
+      text-align: center;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: clamp(14px, 5vw, 36px);
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+
+    .cd-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cd-box {
+      width: clamp(70px, 20vw, 104px);
+      height: clamp(70px, 20vw, 104px);
+      background-color: var(--rose-card);
+      border: 1px solid rgba(212, 169, 106, 0.3);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 24px rgba(201, 127, 147, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .cd-box::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      top: 50%;
+      height: 1px;
+      background: rgba(212, 169, 106, 0.2);
+    }
+
+    .cd-num {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.6rem, 6vw, 2.5rem);
+      font-weight: 500;
+      color: var(--gold-deep);
+      line-height: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cd-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: .6rem;
+      letter-spacing: .4em;
+      text-transform: uppercase;
+      color: var(--gold-text);
+      font-weight: 400;
+    }
+
+    .cd-sep {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      color: var(--gold);
+      align-self: flex-start;
+      margin-top: clamp(16px, 5vw, 24px);
+      opacity: .6;
+    }
+
+    /* ── FOOTER ELEGANTE ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 60px 24px 80px;
+      background: linear-gradient(to bottom, transparent, var(--rose-main), var(--rose-bg-light));
+      border-top: 1px solid rgba(212, 169, 106, 0.2);
+    }
+
+    footer .footer-name {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--rose-deep);
+    }
+
+    footer p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: .75rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--gold-text);
+      font-weight: 400;
+      margin-top: 12px;
+    }
+
+    .belleza-regular {
+      font-family: 'Belleza', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: .5em;
+      color: var(--gold);
+      margin-top: 24px;
+      opacity: .7;
+    }
+
+    /* Animación del banner de bienvenida */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-24px); }
+      to   { opacity: 1; transform: none; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: none; }
+    }
+    @keyframes bounceDown {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- fondo de pétalos flotantes -->
+<div class="petals-bg" aria-hidden="true">
+  <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="pg" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#f2c4ce"/>
+        <stop offset="100%" stop-color="#f2c4ce" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <g fill="url(#pg)">
+      <ellipse cx="120"  cy="140"  rx="28" ry="18" transform="rotate(-30 120 140)"/>
+      <ellipse cx="320"  cy="60"   rx="22" ry="14" transform="rotate(15 320 60)"/>
+      <ellipse cx="600"  cy="200"  rx="32" ry="20" transform="rotate(45 600 200)"/>
+      <ellipse cx="900"  cy="80"   rx="20" ry="12" transform="rotate(-20 900 80)"/>
+      <ellipse cx="1200" cy="150"  rx="30" ry="18" transform="rotate(35 1200 150)"/>
+      <ellipse cx="1380" cy="50"   rx="18" ry="11" transform="rotate(-15 1380 50)"/>
+      <ellipse cx="80"   cy="500"  rx="24" ry="15" transform="rotate(60 80 500)"/>
+      <ellipse cx="250"  cy="780"  rx="28" ry="18" transform="rotate(-40 250 780)"/>
+      <ellipse cx="500"  cy="650"  rx="20" ry="13" transform="rotate(25 500 650)"/>
+      <ellipse cx="750"  cy="820"  rx="34" ry="21" transform="rotate(-10 750 820)"/>
+      <ellipse cx="1050" cy="700"  rx="22" ry="14" transform="rotate(50 1050 700)"/>
+      <ellipse cx="1300" cy="600"  rx="26" ry="16" transform="rotate(-35 1300 600)"/>
+      <ellipse cx="1420" cy="830"  rx="20" ry="12" transform="rotate(20 1420 830)"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="hero">
+  <div class="crown" aria-hidden="true">✦ ✺ ✦</div>
+  <span class="hero-label">Te Invitamos a Celebrar</span>
+  <h1 class="hero-name">Izis Beltran</h1>
+  <p class="hero-XV">~ My XV Years ~</p>
+  <div class="hero-divider">
+    <span></span>
+    <i aria-hidden="true">✦</i>
+    <span></span>
+  </div>
+  <p class="hero-date-preview">Viernes · 6 de Noviembre, 2026</p>
+  <div class="scroll-hint" aria-label="Desplázate hacia abajo">Desplazar</div>
+</header>
+
+<div class="sections">
+
+  <!-- ═══════════ MENSAJE ═══════════ -->
+  <section id="mensaje" aria-labelledby="msg-heading">
+    <span class="section-tag">Un mensaje especial</span>
+    <h2 id="msg-heading">Para ti, que llegaste</h2>
+    <span class="gold-line"></span>
+    <div class="message-card">
+      <p>
+        Hay momentos en la vida que se graban para siempre en el corazón.<br/>
+        Este es uno de ellos.<br/><br/>
+        Con inmensa alegría y el alma llena de gratitud,<br/>
+        los invitamos a ser testigos del hermoso paso de nuestra hija a los quince años.<br/><br/>
+        Su sonrisa ilumina cada rincón de nuestra vida.<br/>
+        Hoy queremos compartirla con quienes más amamos.
+      </p>
+      <p class="signature">La Familia Beltran Molina</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ DETALLES ═══════════ -->
+  <section id="detalles" aria-labelledby="det-heading">
+    <span class="section-tag">La celebración</span>
+    <h2 id="det-heading">Detalles del evento</h2>
+    <span class="gold-line"></span>
+    <div class="details-grid">
+
+      <!-- TARJETA CON FECHA Y HORA UNIDAS -->
+      <div class="detail-card">
+        <span class="detail-icon" aria-hidden="true">📅</span>
+        <h3>Fecha y Hora</h3>
+        <p class="value">Viernes<br/>06 de Noviembre, 2026</p>
+        <p class="sub" style="font-size: 1.1rem; font-weight: 400; margin-top: 8px;">A las 9:00 PM</p>
+        <p class="sub">Recepción desde las 8:30 PM</p>
+      </div>
+
+      <div class="detail-card">
+        <span class="detail-icon" aria-hidden="true">📍</span>
+        <h3>Lugar</h3>
+        <p class="value">Salón Jardín<br/>Gales</p>
+        <p class="sub">Calle Londres 1715, 85140 Cdad. Obregón, Son.</p>
+        <a href="https://maps.app.goo.gl/bUKpHJYaoJfYY7De9" target="_blank" class="btn-mapa">
+          🗺️ Ver Mapa GPS
+        </a>
+      </div>
+
+      <div class="detail-card">
+        <span class="detail-icon" aria-hidden="true">👗</span>
+        <h3>Código de vestimenta</h3>
+        <p class="value">Formal</p>
+        <p class="sub">Color reservado: rosa palo</p>
+      </div>
+
+    </div>
+
+    <!-- Botón de Confirmación -->
+    <div class="confirmar-container">
+      <a href="https://wa.me/521234567890?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20de%20Izis%20Beltran." target="_blank" class="btn-confirmar">
+        Confirmar Asistencia por WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════ PROGRAMA ═══════════ -->
+  <section id="programa" aria-labelledby="prog-heading">
+    <span class="section-tag">La noche perfecta</span>
+    <h2 id="prog-heading">Programa</h2>
+    <span class="gold-line"></span>
+    <ul class="program-list" role="list">
+      <li>
+        <span class="prog-time">8:30 PM</span>
+        <span class="prog-dot" aria-hidden="true"></span>
+        <div class="prog-info">
+          <strong>Recepción de invitados</strong>
+          <span>Cóctel de bienvenida &amp; música de fondo</span>
+        </div>
+      </li>
+      <li>
+        <span class="prog-time">9:00 PM</span>
+        <span class="prog-dot" aria-hidden="true"></span>
+        <div class="prog-info">
+          <strong>Entrada de la quinceañera</strong>
+          <span>El gran momento que todos esperamos</span>
+        </div>
+      </li>
+      <li>
+        <span class="prog-time">9:30 PM</span>
+        <span class="prog-dot" aria-hidden="true"></span>
+        <div class="prog-info">
+          <strong>Misa de acción de gracias</strong>
+          <span>Bendición especial y vals de honor</span>
+        </div>
+      </li>
+      <li>
+        <span class="prog-time">10:00 PM</span>
+        <span class="prog-dot" aria-hidden="true"></span>
+        <div class="prog-info">
+          <strong>Cena &amp; brindis</strong>
+          <span>Palabras emotivas de la familia</span>
+        </div>
+      </li>
+      <li>
+        <span class="prog-time">11:00 PM</span>
+        <span class="prog-dot" aria-hidden="true"></span>
+        <div class="prog-info">
+          <strong>Primer vals</strong>
+          <span>La princesa baila con su chambelán</span>
+        </div>
+      </li>
+      <li>
+        <span class="prog-time">11:30 PM</span>
+        <span class="prog-dot" aria-hidden="true"></span>
+        <div class="prog-info">
+          <strong>¡A bailar toda la noche!</strong>
+          <span>DJ y sorpresas especiales</span>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ── COUNTDOWN ── -->
+  <section id="countdown" aria-labelledby="cd-heading">
+    <div class="countdown-wrap">
+      <span class="section-tag">El gran día se acerca</span>
+      <h2 id="cd-heading">Cuenta regresiva</h2>
+      <span class="gold-line"></span>
+      <div class="countdown" role="timer" aria-live="polite" aria-label="Tiempo restante para la quinceañera">
+        <div class="cd-unit">
+          <div class="cd-box"><span class="cd-num" id="cd-dias">--</span></div>
+          <span class="cd-label">Días</span>
+        </div>
+        <span class="cd-sep" aria-hidden="true">:</span>
+        <div class="cd-unit">
+          <div class="cd-box"><span class="cd-num" id="cd-horas">--</span></div>
+          <span class="cd-label">Horas</span>
+        </div>
+        <span class="cd-sep" aria-hidden="true">:</span>
+        <div class="cd-unit">
+          <div class="cd-box"><span class="cd-num" id="cd-min">--</span></div>
+          <span class="cd-label">Minutos</span>
+        </div>
+        <span class="cd-sep" aria-hidden="true">:</span>
+        <div class="cd-unit">
+          <div class="cd-box"><span class="cd-num" id="cd-seg">--</span></div>
+          <span class="cd-label">Segundos</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /sections -->
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <p class="footer-name">Izis Beltran</p>
+  <p>VI · XI · MMXXVI</p>
+  <div class="belleza-regular" aria-hidden="true">✦  ✸  ✦  ✸  ✦</div>
+</footer>
+
+<script>
+  /* ── Sincronizado para el 6 de Noviembre de 2026 a las 21:00 ── */
+  const target = new Date('2026-11-06T21:00:00');
+
+  function updateCountdown() {
+    const now  = new Date();
+    const diff = target - now;
+
+    if (diff <= 0) {
+      document.getElementById('cd-dias').textContent  = '00';
+      document.getElementById('cd-horas').textContent = '00';
+      document.getElementById('cd-min').textContent   = '00';
+      document.getElementById('cd-seg').textContent   = '00';
+      return;
+    }
+
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000)  / 60000);
+    const s = Math.floor((diff % 60000)    / 1000);
+
+    document.getElementById('cd-dias').textContent  = String(d).padStart(2,'0');
+    document.getElementById('cd-horas').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-min').textContent   = String(m).padStart(2,'0');
+    document.getElementById('cd-seg').textContent   = String(s).padStart(2,'0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
