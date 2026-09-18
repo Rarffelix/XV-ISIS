@@ -323,7 +323,7 @@
       box-shadow: 0 12px 32px rgba(182, 141, 74, 0.5);
     }
 
-    /* ── PROGRAM con cronología dorada ── */
+    /* ── PROGRAM con cronología dorada (Mantenido el estilo por si lo ocupas después) ── */
     .program-list {
       list-style: none;
       position: relative;
@@ -472,10 +472,13 @@
       border-top: 1px solid rgba(212, 169, 106, 0.2);
     }
 
+    /* ESTE ES EL BLOQUE CORREGIDO: SE BLOQUEA LA MAYÚSCULA PARA QUE SE VEA COMO ARRIBA */
     footer .footer-name {
       font-family: 'Great Vibes', cursive;
       font-size: clamp(2.5rem, 8vw, 4rem);
       color: var(--rose-deep);
+      text-transform: none !important; /* CORRECCIÓN PARA CURSIVA PERFECTA */
+      letter-spacing: normal !important; /* CORRECCIÓN DE ESPACIOS */
     }
 
     footer p {
@@ -551,8 +554,8 @@
 <header class="hero">
   <div class="crown" aria-hidden="true">✦ ✺ ✦</div>
   <span class="hero-label">Te Invitamos a Celebrar</span>
-  <h1 class="hero-name">Izis</h1>
   <p class="hero-XV">~ XV Años ~</p>
+  <h1 class="hero-name">Izis</h1>
   <div class="hero-divider">
     <span></span>
     <i aria-hidden="true">✦</i>
@@ -592,7 +595,6 @@
         <h3>Fecha y Hora</h3>
         <p class="value">Viernes<br/>06 de Noviembre, 2026</p>
         <p class="sub" style="font-size: 1.1rem; font-weight: 400; margin-top: 8px;">A las 9:00 PM</p>
-        <p class="sub">Recepción desde las 8:30 PM</p>
       </div>
 
       <div class="detail-card">
@@ -615,62 +617,6 @@
         Confirmar Asistencia por WhatsApp
       </a>
     </div>
-  </section>
-
-  <section id="programa" aria-labelledby="prog-heading">
-    <span class="section-tag">La noche perfecta</span>
-    <h2 id="prog-heading">Programa</h2>
-    <span class="gold-line"></span>
-    <ul class="program-list" role="list">
-      <li>
-        <span class="prog-time">8:30 PM</span>
-        <span class="prog-dot" aria-hidden="true"></span>
-        <div class="prog-info">
-          <strong>Recepción de invitados</strong>
-          <span>Cóctel de bienvenida &amp; música de fondo</span>
-        </div>
-      </li>
-      <li>
-        <span class="prog-time">9:00 PM</span>
-        <span class="prog-dot" aria-hidden="true"></span>
-        <div class="prog-info">
-          <strong>Entrada de la quinceañera</strong>
-          <span>El gran momento que todos esperamos</span>
-        </div>
-      </li>
-      <li>
-        <span class="prog-time">9:30 PM</span>
-        <span class="prog-dot" aria-hidden="true"></span>
-        <div class="prog-info">
-          <strong>Misa de acción de gracias</strong>
-          <span>Bendición especial y vals de honor</span>
-        </div>
-      </li>
-      <li>
-        <span class="prog-time">10:00 PM</span>
-        <span class="prog-dot" aria-hidden="true"></span>
-        <div class="prog-info">
-          <strong>Cena &amp; brindis</strong>
-          <span>Palabras emotivas de la familia</span>
-        </div>
-      </li>
-      <li>
-        <span class="prog-time">11:00 PM</span>
-        <span class="prog-dot" aria-hidden="true"></span>
-        <div class="prog-info">
-          <strong>Primer vals</strong>
-          <span>La princesa baila con su chambelán</span>
-        </div>
-      </li>
-      <li>
-        <span class="prog-time">11:30 PM</span>
-        <span class="prog-dot" aria-hidden="true"></span>
-        <div class="prog-info">
-          <strong>¡A bailar toda la noche!</strong>
-          <span>DJ y sorpresas especiales</span>
-        </div>
-      </li>
-    </ul>
   </section>
 
   <section id="countdown" aria-labelledby="cd-heading">
