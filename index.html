@@ -256,6 +256,10 @@
       text-align: center;
       box-shadow: 0 6px 28px rgba(201, 127, 147, 0.1); /* Sombra rosada */
       transition: transform .3s ease, box-shadow .3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
     }
     .detail-card:hover {
       transform: translateY(-5px);
@@ -294,6 +298,27 @@
       font-weight: 300;
     }
 
+    /* Botón interno para mapa GPS */
+    .btn-mapa {
+      display: inline-block;
+      margin-top: 15px;
+      font-size: 0.75rem;
+      color: var(--gold-text);
+      text-decoration: none;
+      border: 1px solid var(--gold);
+      padding: 6px 16px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .btn-mapa:hover {
+      background-color: var(--gold);
+      color: white;
+    }
+
     /* ── BOTÓN DE CONFIRMACIÓN GRADIENTE DORADO ── */
     .confirmar-container {
       text-align: center;
@@ -321,75 +346,6 @@
       background: linear-gradient(135deg, var(--gold) 0%, #eac07e 50%, var(--gold) 100%);
       transform: translateY(-4px);
       box-shadow: 0 12px 32px rgba(182, 141, 74, 0.5);
-    }
-
-    /* ── PROGRAM con cronología dorada (Mantenido el estilo por si lo ocupas después) ── */
-    .program-list {
-      list-style: none;
-      position: relative;
-      padding-left: 0;
-    }
-    .program-list::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 0; bottom: 0;
-      width: 1px;
-      /* Línea dorada */
-      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
-      transform: translateX(-50%);
-    }
-
-    .program-list li {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      margin-bottom: 30px;
-      position: relative;
-    }
-    .program-list li:nth-child(odd)  { flex-direction: row; }
-    .program-list li:nth-child(even) { flex-direction: row-reverse; }
-
-    .prog-time {
-      flex: 1;
-      text-align: right;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
-      color: var(--gold-text);
-      font-weight: 500;
-    }
-    .program-list li:nth-child(even) .prog-time { text-align: left; }
-
-    .prog-dot {
-      width: 14px; height: 14px;
-      border-radius: 50%;
-      background: var(--gold); /* Punto dorado */
-      border: 3px solid var(--rose-bg-light); /* Borde del color de fondo */
-      box-shadow: 0 0 0 1px var(--gold);
-      flex-shrink: 0;
-      z-index: 1;
-    }
-
-    .prog-info { flex: 1; }
-    .prog-info strong {
-      display: block;
-      font-weight: 500;
-      font-size: 1.05rem;
-      color: var(--text);
-    }
-    .prog-info span {
-      font-size: .8rem;
-      color: var(--gold-text);
-      font-weight: 300;
-    }
-    .program-list li:nth-child(even) .prog-info { text-align: right; }
-
-    @media (max-width: 520px) {
-      .program-list::before { left: 24px; }
-      .program-list li,
-      .program-list li:nth-child(even) { flex-direction: row; gap: 16px;}
-      .prog-time { display: none; }
-      .program-list li:nth-child(even) .prog-info { text-align: left; }
     }
 
     /* ── COUNTDOWN con cajas Rosa Palo ── */
@@ -580,7 +536,7 @@
         Su sonrisa ilumina cada rincón de nuestra vida.<br/>
         Hoy queremos compartirla con quienes más amamos.
       </p>
-      <p class="signature">La Familia Beltran Molina</p>
+      <p class="signature">Familia Beltran Molina</p>
     </div>
   </section>
 
@@ -590,9 +546,31 @@
     <span class="gold-line"></span>
     <div class="details-grid">
 
+      <!-- NUEVAS TARJETAS PARA LA IGLESIA -->
+      <div class="detail-card">
+        <span class="detail-icon" aria-hidden="true">🕊️</span>
+        <h3>Ceremonia Religiosa</h3>
+        <p class="value">Viernes<br/>06 de Noviembre, 2026</p>
+        <p class="sub" style="font-size: 1.1rem; font-weight: 400; margin-top: 8px;">A las 6:00 PM</p>
+      </div>
+
+      <div class="detail-card">
+        <span class="detail-icon" aria-hidden="true">⛪</span>
+        <h3>Iglesia</h3>
+        <p class="value" style="font-size: 1rem;">Parroquia Nuestra Señora<br/>de Guadalupe de Valle Verde</p>
+        <p class="sub">Boulevard Esmeralda esquina con C. Topacio, Valle Verde, 85097 Cdad. Obregón, Son.</p>
+        
+        <a href="https://maps.app.goo.gl/pXw2V2N1PADTo4xz5" 
+           target="_blank" 
+           class="btn-mapa">
+           🗺️ Ver Mapa GPS
+        </a>
+      </div>
+
+      <!-- TARJETAS EXISTENTES PARA LA RECEPCIÓN -->
       <div class="detail-card">
         <span class="detail-icon" aria-hidden="true">📅</span>
-        <h3>Fecha y Hora</h3>
+        <h3>Recepción</h3>
         <p class="value">Viernes<br/>06 de Noviembre, 2026</p>
         <p class="sub" style="font-size: 1.1rem; font-weight: 400; margin-top: 8px;">A las 9:00 PM</p>
       </div>
@@ -605,7 +583,7 @@
         
         <a href="https://maps.app.goo.gl/bUKpHJYaoJfYY7De9" 
            target="_blank" 
-           style="display: inline-block; margin-top: 15px; font-size: 0.75rem; color: var(--gold-text); text-decoration: none; border: 1px solid var(--gold); padding: 5px 15px; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px; font-weight: 500; transition: all 0.3s ease;">
+           class="btn-mapa">
            🗺️ Ver Mapa GPS
         </a>
       </div>
@@ -613,7 +591,7 @@
     </div>
 
     <div class="confirmar-container">
-      <a href="https://wa.me/526442189643?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20de%20Izis.%20Mi%20nombre%20es:%20" target="_blank" class="btn-confirmar">
+      <a href="https://wa.me/526441515334?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20de%20Izis.%20Mi%20nombre%20es:%20" target="_blank" class="btn-confirmar">
         Confirmar Asistencia por WhatsApp
       </a>
     </div>
